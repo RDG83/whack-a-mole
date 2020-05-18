@@ -50,7 +50,7 @@ startButton.addEventListener('click', startGame);
 stopButton.addEventListener('click', stopGame);
 
 function startGame() {
-    t = setInterval(playGame, 50)
+    t = setInterval(playGame, 600);
 }
 
 function stopGame() {
@@ -61,7 +61,7 @@ function setupGame() {
     shuffle(cardArray);
     for (let i = 0; i < 9; i++) {
         let card = document.createElement('img');
-        card.setAttribute('src', cardArray[i].img)
+        card.setAttribute('src', cardArray[i].img);
         card.addEventListener('click', checkHit);
         container.appendChild(card);
     }
@@ -69,18 +69,15 @@ function setupGame() {
 
 function playGame() {
     while (container.firstChild) {
-        container.removeChild(container.lastChild)
+        container.removeChild(container.lastChild);
     }
     setupGame();
 }
-// add id to img to be able to select them
-// write continuous function that selects image at random and change it to the mole and then change it back to the original image
-// add event listeners to the mole img
 
 function checkHit() {
-    cardSrc = this.getAttribute('src')
+    cardSrc = this.getAttribute('src');
     if (cardSrc === 'images/mole.png') {
-        score.textContent++
+        score.textContent++;
     }
 }
 
@@ -103,6 +100,7 @@ function shuffle(array) {
 
     return array;
 }
+
 
 setupGame();
 
