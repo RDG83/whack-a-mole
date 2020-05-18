@@ -1,5 +1,9 @@
 const container = document.querySelector(".container");
 const startButton = document.querySelector("#startbutton");
+const stopButton = document.querySelector("#stopbutton");
+const score = document.querySelector("#score");
+
+score.textContent = 0;
 
 const cardArray = [
     {
@@ -42,10 +46,15 @@ const cardArray = [
 
 ]
 
-startButton.addEventListener('click', startGame)
+startButton.addEventListener('click', startGame);
+stopButton.addEventListener('click', stopGame);
 
 function startGame() {
-    setInterval(playGame, 500)
+    t = setInterval(playGame, 50)
+}
+
+function stopGame() {
+    clearInterval(t);
 }
 
 function setupGame() {
@@ -53,6 +62,7 @@ function setupGame() {
     for (let i = 0; i < 9; i++) {
         let card = document.createElement('img');
         card.setAttribute('src', cardArray[i].img)
+        card.addEventListener('click', checkHit);
         container.appendChild(card);
     }
 }
@@ -67,7 +77,12 @@ function playGame() {
 // write continuous function that selects image at random and change it to the mole and then change it back to the original image
 // add event listeners to the mole img
 
-
+function checkHit() {
+    cardSrc = this.getAttribute('src')
+    if (cardSrc === 'images/mole.png') {
+        score.textContent++
+    }
+}
 
 // Function to randomize an array
 function shuffle(array) {
